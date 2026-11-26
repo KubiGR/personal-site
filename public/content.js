@@ -39,7 +39,7 @@ window.CONTENT = {
       icon: "swords",
       description: "Finds large Warhammer 40k tournaments on Best Coast Pairings, fetches army lists on demand through a slow background queue, and analyses how team events were paired and played.",
       url: "https://logis.dranidis.com",
-      repo: "https://github.com/KubiGR/bcp-scrapper",
+      repo: "https://github.com/KubiGR/logis",
       image: "images/logis.jpg",
       tags: ["TypeScript", "Node.js", "PostgreSQL", "Zod", "Vitest", "Playwright", "Docker"],
       inviteOnly: true,
