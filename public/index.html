@@ -209,6 +209,16 @@
       color: var(--accent); font-weight: 500; cursor: pointer; white-space: nowrap;
     }
     .request .i { transition: transform .2s ease-out; }
+    .source, .verify {
+      display: inline-flex; width: fit-content; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer;
+      transition: color .2s ease;
+    }
+    .source { margin-top: 2px; }
+    .source:hover, .source:focus-visible, .verify:hover { color: var(--accent); text-decoration: none; outline: none; }
+    .source .i-sm, .verify .i-sm { width: 13px; height: 13px; transition: transform .2s ease-out; }
+    .source:hover .i-sm, .verify:hover .i-sm { transform: translate(2px, -2px); }
+    .verify { gap: 3px; margin-left: 4px; font-size: 12px; }
     .request:hover .i { transform: translateX(3px); }
 
     /* Skills */
@@ -379,11 +389,17 @@
           <h3>${p.icon ? `<span class="kind">${icon(p.icon)}</span>` : ""}${esc(p.title)}${p.url ? `<span class="arrow">${icon("arrow-up-right")}</span>` : ""}</h3>
           <p>${esc(p.description)}</p>
           <div class="tags">${(p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+          ${p.repo ? `<span class="source" role="link" tabindex="0" data-href="${esc(p.repo)}">${icon("github")}Source on GitHub${icon("arrow-up-right", "i-sm")}</span>` : ""}
           ${p.inviteOnly ? `<div class="invite">${icon("lock")}<span>Invite only — joining requires my approval.</span>${c.email ? `<span class="request" role="link" tabindex="0" data-mail="${esc(requestMail(p))}">Request access${icon("arrow-right", "i-sm")}</span>` : ""}</div>` : ""}
         </div></${tag}>`;
     }).join("");
     document.querySelectorAll(".request").forEach((el) => {
       const go = (e) => { e.preventDefault(); e.stopPropagation(); location.href = el.dataset.mail; };
+      el.addEventListener("click", go);
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") go(e); });
+    });
+    document.querySelectorAll(".source").forEach((el) => {
+      const go = (e) => { e.preventDefault(); e.stopPropagation(); window.open(el.dataset.href, "_blank", "noopener"); };
       el.addEventListener("click", go);
       el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") go(e); });
     });
@@ -403,7 +419,8 @@
           return m ? `<span>${esc(m[1])} <em>· ${esc(cap(m[2]))}</em></span>` : `<span>${esc(s)}</span>`;
         }).join("")}</div>`;
       } else if (label === "Certifications") {
-        body = `<div class="tags">${items.map((s) => `<span class="tag cert">${icon("badge-check")}${esc(s)}</span>`).join("")}</div>`;
+        const v = c.certificationsLink;
+        body = `<div class="tags">${items.map((s) => `<span class="tag cert">${icon("badge-check")}${esc(s)}</span>`).join("")}${v ? `<a class="verify" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.label)}${icon("arrow-up-right", "i-sm")}</a>` : ""}</div>`;
       } else {
         body = `<div class="tags">${items.map((s) => projectTags.has(norm(s))
           ? `<button type="button" class="tag" data-skill="${esc(norm(s))}" aria-pressed="false">${esc(s)}</button>`
@@ -484,6 +501,7 @@
       { label: "Jump to Projects", icon: "folder-git-2", run: () => jump("projects") },
       { label: "Jump to Skills", icon: "cpu", run: () => jump("skills") },
       ...(c.links || []).map((l) => ({ label: `Open ${l.label}`, hint: l.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""), icon: linkIcon(l), run: () => window.open(l.url, "_blank", "noopener") })),
+      ...(c.projects || []).filter((p) => p.repo).map((p) => ({ label: `View ${p.title} source`, hint: "GitHub", icon: "github", run: () => window.open(p.repo, "_blank", "noopener") })),
       ...(c.email ? (c.projects || []).filter((p) => p.inviteOnly).map((p) => ({ label: `Request access to ${p.title}`, icon: "lock", run: () => { location.href = requestMail(p); } })) : []),
       { label: "Toggle dark / light theme", icon: "moon", run: toggleTheme },
     ].filter(Boolean);
