@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+.cf-token
+new-photo.jpg
+*:Zone.Identifier
+DEPLOY.md

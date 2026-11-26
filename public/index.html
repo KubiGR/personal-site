@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal Site</title>
+  <meta name="description" content="Projects and skills" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --text: #1c1b19;
+      --muted: #6b6862;
+      --line: #e7e4dd;
+      --accent: #2f5d50;
+      --accent-soft: #e5efeb;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 20px rgba(0,0,0,.05);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #131413;
+        --surface: #1b1d1c;
+        --text: #ecebe7;
+        --muted: #a09d96;
+        --line: #2c2f2d;
+        --accent: #8cc7b3;
+        --accent-soft: #1f2e29;
+        --shadow: none;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #131413;
+      --surface: #1b1d1c;
+      --text: #ecebe7;
+      --muted: #a09d96;
+      --line: #2c2f2d;
+      --accent: #8cc7b3;
+      --accent-soft: #1f2e29;
+      --shadow: none;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 Inter, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 12px; }
+    .brand { font-weight: 600; color: var(--text); }
+    .nav-links { display: flex; gap: 18px; align-items: center; font-size: 14px; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .icon-btn {
+      background: none; border: 1px solid var(--line); color: var(--muted);
+      border-radius: 8px; width: 32px; height: 32px; cursor: pointer; font-size: 15px;
+    }
+    .icon-btn:hover { color: var(--text); }
+
+    /* Hero */
+    header.hero { padding: 72px 0 40px; }
+    .hero-row { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .avatar {
+      width: 112px; height: 112px; border-radius: 50%; object-fit: cover;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font: 600 36px Fraunces, serif; flex-shrink: 0;
+    }
+    h1 { font: 600 clamp(32px, 6vw, 46px)/1.1 Fraunces, Georgia, serif; margin: 0 0 6px; letter-spacing: -.01em; }
+    .role { color: var(--muted); font-size: 18px; margin: 0; }
+    .bio { font-size: 17px; max-width: 640px; margin: 24px 0; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;
+      border: 1px solid var(--line); color: var(--text); background: var(--surface);
+    }
+    .btn:hover { text-decoration: none; border-color: var(--muted); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+    /* Sections */
+    section { padding: 40px 0; border-top: 1px solid var(--line); }
+    h2 {
+      font: 600 13px Inter, sans-serif; text-transform: uppercase; letter-spacing: .12em;
+      color: var(--muted); margin: 0 0 24px;
+    }
+
+    /* Projects */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .card {
+      display: flex; flex-direction: column;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+      overflow: hidden; box-shadow: var(--shadow); color: var(--text);
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    a.card:hover { transform: translateY(-2px); border-color: var(--accent); text-decoration: none; }
+    .card-img { aspect-ratio: 16/9; background: var(--accent-soft); object-fit: cover; width: 100%; display: block; }
+    .card-img.placeholder { display: grid; place-items: center; color: var(--accent); font: 600 28px Fraunces, serif; }
+    .card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .card h3 { margin: 0; font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
+    .card h3 .arrow { color: var(--muted); font-weight: 400; }
+    .card p { margin: 0; color: var(--muted); font-size: 14.5px; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .invite { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; margin-top: 6px; }
+    .request { color: var(--accent); font-weight: 500; cursor: pointer; white-space: nowrap; }
+    .request:hover { text-decoration: underline; }
+    .tag { font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+    /* Skills */
+    .skills { display: grid; gap: 14px; }
+    .skill-row { display: grid; grid-template-columns: 150px 1fr; gap: 20px; }
+    .skill-row .label { color: var(--muted); font-size: 14px; padding-top: 3px; }
+
+    footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 600px) {
+      header.hero { padding-top: 44px; }
+      .skill-row { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top" id="brand"></a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <button class="icon-btn" id="theme" title="Toggle theme" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap" id="top">
+    <header class="hero">
+      <div class="hero-row">
+        <div id="avatar"></div>
+        <div>
+          <h1 id="name"></h1>
+          <p class="role" id="role"></p>
+        </div>
+      </div>
+      <p class="bio" id="bio"></p>
+      <div class="actions" id="actions"></div>
+    </header>
+
+    <section id="projects"><h2>Projects</h2><div class="grid" id="project-grid"></div></section>
+    <section id="skills"><h2>Skills</h2><div class="skills" id="skill-list"></div></section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span id="copyright"></span>
+      <span id="footer-links"></span>
+    </div>
+  </footer>
+
+  <script>
+    // Load content.js fresh on every visit, so edits show up right away even though
+    // Cloudflare tells browsers to cache scripts for hours.
+    const loader = document.createElement("script");
+    loader.src = "content.js?t=" + Date.now();
+    loader.onload = render;
+    document.head.appendChild(loader);
+
+    function render() {
+    const c = window.CONTENT;
+    const $ = (id) => document.getElementById(id);
+    const esc = (s = "") => String(s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    const initials = (n) => n.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+
+    document.title = c.name;
+    $("brand").textContent = c.name;
+    $("name").textContent = c.name;
+    $("role").textContent = [c.role, c.location].filter(Boolean).join(" · ");
+    $("bio").textContent = c.bio;
+    $("avatar").outerHTML = c.photo
+      ? `<img class="avatar" src="${esc(c.photo)}" alt="${esc(c.name)}">`
+      : `<div class="avatar">${esc(initials(c.name))}</div>`;
+
+    // Hero buttons
+    const actions = [];
+    if (c.email) actions.push(`<a class="btn primary" href="mailto:${esc(c.email)}">Get in touch</a>`);
+    (c.links || []).forEach((l) => actions.push(`<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`));
+    $("actions").innerHTML = actions.join("");
+
+    // Projects
+    $("project-grid").innerHTML = (c.projects || []).map((p) => {
+      const img = p.image
+        ? `<img class="card-img" src="${esc(p.image)}" alt="" loading="lazy">`
+        : `<div class="card-img placeholder">${esc(initials(p.title))}</div>`;
+      const tag = p.url ? "a" : "div";
+      const href = p.url ? ` href="${esc(p.url)}" target="_blank" rel="noopener"` : "";
+      return `<${tag} class="card"${href}>${img}<div class="card-body">
+        <h3>${esc(p.title)}${p.url ? '<span class="arrow">↗</span>' : ""}</h3>
+        <p>${esc(p.description)}</p>
+        <div class="tags">${(p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+        ${p.inviteOnly ? `<div class="invite">🔒 Invite only — joining requires my approval.${c.email ? ` <span class="request" data-mail="mailto:${esc(c.email)}?subject=${encodeURIComponent("Access request: " + p.title)}">Request access</span>` : ""}</div>` : ""}
+      </div></${tag}>`;
+    }).join("");
+
+    document.querySelectorAll(".request").forEach((el) => el.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation(); location.href = el.dataset.mail;
+    }));
+
+    // Skills
+    $("skill-list").innerHTML = Object.entries(c.skills || {}).map(([label, items]) =>
+      `<div class="skill-row"><div class="label">${esc(label)}</div>
+       <div class="tags">${items.map((s) => `<span class="tag">${esc(s)}</span>`).join("")}</div></div>`
+    ).join("");
+
+    // Hide empty sections
+    ["projects", "skills"].forEach((id) => {
+      const s = $(id);
+      if (!s.querySelector(".card, .skill-row")) s.style.display = "none";
+    });
+
+    $("copyright").textContent = `© ${new Date().getFullYear()} ${c.name}`;
+    $("footer-links").innerHTML = c.email ? `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>` : "";
+
+    // Theme toggle (remembered per browser)
+    const root = document.documentElement;
+    try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch {}
+    $("theme").onclick = () => {
+      const dark = root.dataset.theme
+        ? root.dataset.theme === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch {}
+    };
+    }
+  </script>
+</body>
+</html>
