@@ -47,12 +47,11 @@ window.CONTENT = {
     {
       title: "Habits",
       icon: "circle-check",
-      description: "A minimal habit tracker inspired by Atomic Habits, installable on phones and usable offline: flexible schedules, schedule-aware streaks, half-checks and yearly heatmaps.",
+      description: "A minimal habit tracker inspired by Atomic Habits, installable on phones and usable offline: flexible schedules, schedule-aware streaks, half-checks and yearly heatmaps. Sign-ups are open to everyone.",
       url: "https://habits.dranidis.com",
       repo: "https://github.com/KubiGR/habits",
       image: "images/habits.jpg",
       tags: ["TypeScript", "React", "Vite", "Node.js", "PostgreSQL", "Docker"],
-      inviteOnly: true,
     },
   ],
 
