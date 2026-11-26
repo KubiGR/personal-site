@@ -8,6 +8,9 @@ window.CONTENT = {
   location: "", // e.g. "Thessaloniki, Greece"
   bio: "Senior software engineer with deep experience across modern frontend ecosystems and Node.js backends. I thrive in complex codebases, push for clean architecture, and obsess over detail — leaning towards documentation-driven development, refactoring, and long-term maintainability. Strong at shipping fast without sacrificing quality, and equally comfortable shaping APIs and refining UI architecture.",
 
+  // Optional: text for the small status dot on your photo (shown on hover). Leave "" to hide the dot.
+  status: "",
+
   // Optional: path to a photo (e.g. "photo.jpg" in this folder). Leave "" to show initials.
   photo: "images/photo-3.jpg",
 
@@ -19,10 +22,11 @@ window.CONTENT = {
   ],
 
   // Your project sites. `url` makes the card clickable; `image` is optional (16:9 works best).
-  // `inviteOnly: true` shows an "approval needed" note and a "Request access" email link.
+  // `icon` is a small badge next to the title. `inviteOnly: true` shows an "approval needed" note and a "Request access" email link.
   projects: [
     {
       title: "Pick2Play",
+      icon: "dices", // any Lucide icon name included in index.html
       description: "Board game recommendation engine built on BoardGameGeek data — filter by player count, playtime, rating, popularity and weight. Server-rendered and self-hosted.",
       url: "http://pick2play.dranidis.com",
       image: "images/pick2play.jpg",
@@ -30,6 +34,7 @@ window.CONTENT = {
     },
     {
       title: "Logis",
+      icon: "swords", // any Lucide icon name included in index.html
       description: "Finds big Warhammer 40k tournaments on Best Coast Pairings, pulls army lists on demand, and analyses how team events were paired and played.",
       url: "https://logis.dranidis.com",
       image: "images/logis.jpg",
@@ -38,6 +43,7 @@ window.CONTENT = {
     },
     {
       title: "Habits",
+      icon: "circle-check", // any Lucide icon name included in index.html
       description: "A minimal habit tracker inspired by Atomic Habits: streaks, flexible schedules, half-checks, moon phases and a yearly heatmap.",
       url: "https://habits.dranidis.com",
       image: "images/habits.jpg",
