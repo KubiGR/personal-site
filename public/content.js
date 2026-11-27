@@ -37,11 +37,11 @@ window.CONTENT = {
     {
       title: "Logis",
       icon: "swords",
-      description: "Finds large Warhammer 40k tournaments on Best Coast Pairings, fetches army lists on demand through a slow background queue, and analyses how team events were paired and played.",
+      description: "Finds large Warhammer 40k tournaments and fetches army lists on demand. A React Flow preview lets you explore team pairing paths and final lineups. A private Kibana dashboard tracks fetch-queue outcomes and failure rates.",
       url: "https://logis.dranidis.com",
       repo: "https://github.com/KubiGR/logis",
       image: "images/logis.jpg",
-      tags: ["TypeScript", "Node.js", "PostgreSQL", "Zod", "Vitest", "Playwright", "Docker"],
+      tags: ["TypeScript", "Node.js", "PostgreSQL", "React Flow", "Elasticsearch", "Kibana", "Zod", "Vitest", "Playwright", "Docker"],
       inviteOnly: true,
     },
     {
